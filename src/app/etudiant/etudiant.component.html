@@ -1,0 +1,44 @@
+<div class="container">
+    <h1>Liste des étudiants</h1>
+    <button class="btn btn-primary mb-3" (click)="openModal()">Ajouter un étudiant</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Age</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etudiant of etudiants">
+          <td>{{ etudiant.id }}</td>
+          <td>{{ etudiant.nom }}</td>
+          <td>{{ etudiant.prenom }}</td>
+          <td>{{ etudiant.age }}</td>
+          <td>{{ etudiant.email }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteEtudiant(etudiant.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Modal -->
+    <div *ngIf="modalOpen" class="modal-backdrop">
+      <div class="modal-content">
+        <h2>Ajouter un étudiant</h2>
+        <form (ngSubmit)="addEtudiant()">
+          <input type="text" [(ngModel)]="newEtudiant.nom" placeholder="Nom" required name="nom" />
+          <input type="text" [(ngModel)]="newEtudiant.prenom" placeholder="Prénom" required name="prenom" />
+          <input type="number" [(ngModel)]="newEtudiant.age" placeholder="Age" required name="age" />
+          <input type="email" [(ngModel)]="newEtudiant.email" placeholder="Email" required name="email" />
+          <button type="submit" class="btn btn-success">Ajouter</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Fermer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
